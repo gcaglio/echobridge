@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<conf>
+	<server initial-port="8082"/>
+	<devices>
+		<device uuid="cbc4bc63-e0e2-3a78-8a9f-f0ff7e419b7a" friendly-name="Virtual switch 1" />
+  		<device uuid="cbc4bc63-e0e2-3a78-8a9f-f0ff7e419b7b" friendly-name="Virtual switch 2" />
+  		<device uuid="cbc4bc63-e0e2-3a78-8a9f-f0ff7e419b7c" friendly-name="Virtual switch 3" />
+	</devices>
+</conf>
