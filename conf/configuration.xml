@@ -7,9 +7,11 @@
   		<device uuid="cbc4bc63-e0e2-3a78-8a9f-f0ff7e419b7c" friendly-name="Virtual switch 3" class="net.cantylab.devices.DummyDevice"/>
 	
 		<!-- this virtual switch allow to call an URL for each switch actions (turn on / turn ofF) -->
+		<!-- EXAMPLE : this device call 2 different urls for turning off and on lights using an http url calls
+		               this device expect to have somthing like { lights : 1 } or {lights : 0 } from the http call -->
   		<device uuid="cbc4bc63-e0e2-3a78-8a9f-f0ff7e419b7d" friendly-name="Luci esterne" class="net.cantylab.devices.UrlDevice">
-  			<turnoff method="GET" url="http://192.168.123.180/shutdownExternalLights" parameters="" output_regex_check="(?s).*luci_esterne.*:.*0.*"/>
-  			<turnon method="GET" url="http://192.168.123.180/activateExternalLights" parameters="" output_regex_check="(?s).*luci_esterne.*:.*1.*"/>
+  			<turnoff method="GET" url="http://192.168.123.44/turnOffLights" parameters="" output_regex_check="(?s).*lights.*:.*0.*"/>
+  			<turnon method="GET" url="http://192.168.123.45/turnOnLights" parameters="" output_regex_check="(?s).*lights.*:.*1.*"/>
   		</device>
 	</devices>
 </conf>
