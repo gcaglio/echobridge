@@ -1,11 +1,11 @@
 package net.cantylab.devices;
 
+import org.w3c.dom.Node;
+
 public class DummyDevice extends AbstractDevice{
 
-	public DummyDevice(String friendly_name, String uuid, int port)
-	{
-		this.friendly_name = friendly_name;
-		this.uuid = uuid;
-		this.server_port = port;
+	public DummyDevice(Node n, int port) {
+		super(n,port);
 	}
+
 }

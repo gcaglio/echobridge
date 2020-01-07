@@ -1,26 +1,37 @@
 package net.cantylab.devices;
 
+import org.w3c.dom.Node;
+
 public class AbstractDevice implements Device{
 	
-	protected String uuid;
-	protected String friendly_name;
-	protected int server_port;
 	protected boolean state = false;
-
+	protected int port=80;
+	protected Node n = null;
+	
+	public AbstractDevice(Node n, int port) {
+		this.n = n;
+		this.port = port;
+	}
+	
+	private  AbstractDevice() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 	@Override
 	public String getFriendlyName() {
 		// TODO Auto-generated method stub
-		return friendly_name;
+		return n.getAttributes().getNamedItem("friendly-name").getNodeValue();
 	}
 	@Override
 	public String getUUID() {
 		// TODO Auto-generated method stub
-		return uuid;
+		return n.getAttributes().getNamedItem("uuid").getNodeValue();
 	}
 	@Override
 	public int getServerPort() {
 		// TODO Auto-generated method stub
-		return server_port;
+		return port;
 	}
 	@Override
 	public boolean getState() {

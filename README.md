@@ -15,10 +15,16 @@ For example :
 - The program start an UDP broacast responder thread, to let the Echo Devices discover the virtual switches
 - The program start multiple HTTP server thread (one for each virtual switch) to let the Echo devices interact with the virtual devices
 
-# TODO
-At the moment i've only a "DummyDevice" that track the turnon-turnoff requests, change state but do substiantially nothing.
+# Device types
+At the moment i've only two classes hierarchy : 
+- net.cantylab.devices.DummyDevice that basically do nothing except keeping track of the status changes.
+- net.cantylab.devices.UrlDevice that allow you to call a GET/POST url with parameters and to check the output for a specific java regular expression. You could use this class in the configuration file to invoke Url get or post when Amazon Echo invoke the "turn on" or "turn off" action on your virtual switch
+
+You could easily implement your "device" class extending the net.cantylab.AbstractDevice class, that implements the net.cantylab.Device interface.
+
+Please keep in mind that the Amazon Echo devices need to have the response back to their invocation as soon as possibile: you cannot invoke a long running job. In this scenario you need to start an async thread that basically do what you need to be done and update the "status" variable. 
+
+# Future Releases
 In the next releases i will add support for :
 - MQTT client
-- HTTP/HTTPS interaction
-You could easily implement your logic cloning the DummyDevice class, adding your specific code
 

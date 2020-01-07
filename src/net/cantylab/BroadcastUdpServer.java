@@ -85,7 +85,8 @@ public class BroadcastUdpServer implements Runnable{
 	                  */
 
 	                  for (Device d:device_list) {
-	                	  String message =getEchoResponse("192.168.123.110", d.getServerPort(), d.getUUID(), "setup.xml");
+	                	  //String message =getEchoResponse("192.168.123.110", d.getServerPort(), d.getUUID(), "setup.xml");
+	                	  String message =getEchoResponse("192.168.123.16", d.getServerPort(), d.getUUID(), "setup.xml");
 		                  sendData = message.getBytes();
 		                  System.out.println("Sending back data : \r" + message + "#\r");
 		                  DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, echo_address, echo_port);

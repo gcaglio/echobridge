@@ -2,8 +2,14 @@
 <conf>
 	<server initial-port="8082"/>
 	<devices>
-		<device uuid="cbc4bc63-e0e2-3a78-8a9f-f0ff7e419b7a" friendly-name="Virtual switch 1" />
-  		<device uuid="cbc4bc63-e0e2-3a78-8a9f-f0ff7e419b7b" friendly-name="Virtual switch 2" />
-  		<device uuid="cbc4bc63-e0e2-3a78-8a9f-f0ff7e419b7c" friendly-name="Virtual switch 3" />
+		<device uuid="cbc4bc63-e0e2-3a78-8a9f-f0ff7e419b7a" friendly-name="Virtual switch 1" class="net.cantylab.devices.DummyDevice"/>
+  		<device uuid="cbc4bc63-e0e2-3a78-8a9f-f0ff7e419b7b" friendly-name="Virtual switch 2" class="net.cantylab.devices.DummyDevice"/>
+  		<device uuid="cbc4bc63-e0e2-3a78-8a9f-f0ff7e419b7c" friendly-name="Virtual switch 3" class="net.cantylab.devices.DummyDevice"/>
+	
+		<!-- this virtual switch allow to call an URL for each switch actions (turn on / turn ofF) -->
+  		<device uuid="cbc4bc63-e0e2-3a78-8a9f-f0ff7e419b7d" friendly-name="Luci esterne" class="net.cantylab.devices.UrlDevice">
+  			<turnoff method="GET" url="http://192.168.123.180/shutdownExternalLights" parameters="" output_regex_check="(?s).*luci_esterne.*:.*0.*"/>
+  			<turnon method="GET" url="http://192.168.123.180/activateExternalLights" parameters="" output_regex_check="(?s).*luci_esterne.*:.*1.*"/>
+  		</device>
 	</devices>
 </conf>

@@ -54,12 +54,18 @@ public class EchoBridgeServer {
 			for (int i=0; i<devices.getLength(); i++)
 			{
 				Node n=devices.item(i);
-				String device_name = n.getAttributes().getNamedItem("friendly-name").getNodeValue();
-				String device_uuid=  n.getAttributes().getNamedItem("uuid").getNodeValue();
+				String node_class = n.getAttributes().getNamedItem("class").getNodeValue();
+
+				try {					   
+					   Class c = Class.forName(node_class);
+					   Device device = (Device)c.getConstructor(Node.class,int.class).newInstance(n,port);
+					   devices_obj.add(device);
+				} catch (Exception nde) {
+				   System.err.println("Error instantiating class '"+node_class+"' : " + nde.getMessage());
+				   nde.printStackTrace();
+				}
 				
-				Device d = new DummyDevice(device_name, device_uuid, port);
-				devices_obj.add(d);
-				
+				// in case of error instantiating a device, skip intentionally the port. 
 				port++;
 			}
 			
