@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <conf>
-	<server initial-port="8082"/>
+	<server listen_ipaddress="192.168.123.130" initial-port="8082"/>
 	<devices>
 		<device uuid="cbc4bc63-e0e2-3a78-8a9f-f0ff7e419b7a" friendly-name="Virtual switch 1" class="net.cantylab.devices.DummyDevice"/>
   		<device uuid="cbc4bc63-e0e2-3a78-8a9f-f0ff7e419b7b" friendly-name="Virtual switch 2" class="net.cantylab.devices.DummyDevice"/>
@@ -13,5 +13,14 @@
   			<turnoff method="GET" url="http://192.168.123.44/turnOffLights" parameters="" output_regex_check="(?s).*lights.*:.*0.*"/>
   			<turnon method="GET" url="http://192.168.123.45/turnOnLights" parameters="" output_regex_check="(?s).*lights.*:.*1.*"/>
   		</device>
+  		
+		<!-- this virtual switch allow to publish a message to an MQTT topic -->
+		<!-- EXAMPLE : this device publish 2 different message to the same MQTT topic, authenticated with username and password -->
+  		<device uuid="cbc4bc63-e0e2-3a78-8a9f-f0ff7e419b7e" friendly-name="External MQTT device" class="net.cantylab.devices.MqttDevice">
+  			<turnoff mqtt_username="my_user" mqtt_password="mypwd" topic="/CloudBrick/ESP_BRC_dummybrick/Command" message="{ &quot;message&quot; : &quot;OFF&quot; }" mqtt_server="mqtt.cantylab.net" mqtt_port="1883" />
+  			<turnon  mqtt_username="my_user" mqtt_password="mypwd" topic="/CloudBrick/ESP_BRC_dummybrick/Command" message="{ &quot;message&quot; : &quot;ON&quot; }" mqtt_server="mqtt.cantylab.net" mqtt_port="1883" />
+  		</device>
+
+  		  		
 	</devices>
 </conf>
