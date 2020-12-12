@@ -72,7 +72,8 @@ public class BroadcastUdpServer implements Runnable{
 	                  //serverSocket.receive(receivePacket);
 	                  InetAddress echo_address = receivePacket.getAddress();
 	                  int echo_port = receivePacket.getPort();
-	                  String sentence = new String( receivePacket.getData());	                  
+	                  //String sentence = new String( receivePacket.getData());
+	                  String sentence = new String(receivePacket.getData(),0,receivePacket.getLength());
 	                  
 	                  System.out.println("AlexaUdpServer - incoming text from "+echo_address.toString()+":" + echo_port +" : \r\n" + sentence + "#EOT#\r\n");
 	                  
