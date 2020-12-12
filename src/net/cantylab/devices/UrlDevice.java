@@ -14,8 +14,8 @@ import net.cantylab.utility.UrlUtility;
 public class UrlDevice extends AbstractDevice{
 
 	
-	public UrlDevice(Node n, int port) {
-		super(n,port);
+	public UrlDevice(Node n, String ip, int port) {
+		super(n,ip, port);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class UrlDevice extends AbstractDevice{
 			String params = turnon_node.getAttributes().getNamedItem("parameters").getNodeValue();
 			String output_regex_check = turnon_node.getAttributes().getNamedItem("output_regex_check").getNodeValue();
 			
-			boolean ispost = "post".equals( url.toLowerCase() );
+			boolean ispost = "post".equals( method.toLowerCase() );
 			
 			try {
 				StringBuffer response = UrlUtility.downloadUrl(new URL(url), ispost);

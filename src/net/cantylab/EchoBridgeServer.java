@@ -44,7 +44,10 @@ public class EchoBridgeServer {
 			XPath xPath = XPathFactory.newInstance().newXPath();
 			String init_port_xpression= "/conf/server/@initial-port";
 			int initial_port = ((Double) xPath.compile(init_port_xpression).evaluate(doc, XPathConstants.NUMBER)).intValue();
-			
+
+			String server_ip_address = "/conf/server/@listen_ipaddress";
+			String ip = (String)xPath.compile(server_ip_address).evaluate(doc, XPathConstants.STRING);
+
 			String device_xpression= "/conf/devices/device";
 			NodeList devices = (NodeList) xPath.compile(device_xpression).evaluate(doc, XPathConstants.NODESET);
 			int port = initial_port;
@@ -58,7 +61,7 @@ public class EchoBridgeServer {
 
 				try {					   
 					   Class c = Class.forName(node_class);
-					   Device device = (Device)c.getConstructor(Node.class,int.class).newInstance(n,port);
+					   Device device = (Device)c.getConstructor(Node.class,String.class,int.class).newInstance(n,ip, port);
 					   devices_obj.add(device);
 				} catch (Exception nde) {
 				   System.err.println("Error instantiating class '"+node_class+"' : " + nde.getMessage());

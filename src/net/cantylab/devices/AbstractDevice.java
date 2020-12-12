@@ -7,10 +7,12 @@ public class AbstractDevice implements Device{
 	protected boolean state = false;
 	protected int port=80;
 	protected Node n = null;
+	protected String ip = null;
 	
-	public AbstractDevice(Node n, int port) {
+	public AbstractDevice(Node n, String ip, int port) {
 		this.n = n;
 		this.port = port;
+		this.ip = ip;
 	}
 	
 	private  AbstractDevice() {
@@ -48,5 +50,12 @@ public class AbstractDevice implements Device{
 		state=false;
 	}
 
+	@Override
+	public String getServerIp() {
+		// TODO Auto-generated method stub
+		return ip;
+	}
+
+	
 	
 }

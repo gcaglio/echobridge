@@ -1,5 +1,6 @@
 package net.cantylab;
 
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -13,12 +14,14 @@ public class DeviceServer implements Runnable{
 	private String device_name=null;
 	private Device d = null;
 	private boolean run = false;
+	private String ip = null;
 	
 	public DeviceServer(Device d) {
 		this.port = d.getServerPort();
 		this.device_uuid = d.getUUID();
 		this.device_name = d.getFriendlyName();
 		this.d = d;
+		this.ip = d.getServerIp();
 	}
 	
     public void run(){
@@ -26,7 +29,7 @@ public class DeviceServer implements Runnable{
 
     	try {
     		
-			ServerSocket server = new ServerSocket(port,200);
+    		ServerSocket server = new ServerSocket(port,200,InetAddress.getByName(ip));
 			
 	    	while(run)
 			{

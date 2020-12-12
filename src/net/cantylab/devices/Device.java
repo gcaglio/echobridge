@@ -8,5 +8,6 @@ public interface Device {
 	public boolean getState();
 	public void turnOn();
 	public void turnOff();
+	public String getServerIp();
 	
 }
