@@ -4,7 +4,7 @@ This program is a "bridge" between the Echo devices and any other software compo
 For example :
 - run a report
 - send a notification (mqtt, https, etc)
-...
+- whatever you need
 
 # How to use
 1. download and compile
@@ -19,12 +19,16 @@ For example :
 At the moment i've only two classes hierarchy : 
 - net.cantylab.devices.DummyDevice that basically do nothing except keeping track of the status changes.
 - net.cantylab.devices.UrlDevice that allow you to call a GET/POST url with parameters and to check the output for a specific java regular expression. You could use this class in the configuration file to invoke Url get or post when Amazon Echo invoke the "turn on" or "turn off" action on your virtual switch
+- net.cantylab.devices.MqttDevice that allow you to publish a message to an MQTT topic. If the publish code ends without errors (=the message is succesfully published) the device set its state accordingly. You could use this class in the configuration file to publish messages to a specific topic invoking Alexa's turn-on/turn-off command.
 
 You could easily implement your "device" class extending the net.cantylab.AbstractDevice class, that implements the net.cantylab.Device interface.
 
 Please keep in mind that the Amazon Echo devices need to have the response back to their invocation as soon as possibile: you cannot invoke a long running job. In this scenario you need to start an async thread that basically do what you need to be done and update the "status" variable. 
 
-# Future Releases
+
+# Latest Changes 
 In the next releases i will add support for :
-- MQTT client
+- Dec/2020 : implemented MQTT client support
+  NOTE : the MqttDevice class implements its functionalities using the MQTT_PAHO_CLIENT library (not included)
+- Dec/2020 : fixed Alexa payload string buffer length bug
 
