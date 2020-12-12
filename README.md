@@ -25,6 +25,16 @@ You could easily implement your "device" class extending the net.cantylab.Abstra
 
 Please keep in mind that the Amazon Echo devices need to have the response back to their invocation as soon as possibile: you cannot invoke a long running job. In this scenario you need to start an async thread that basically do what you need to be done and update the "status" variable. 
 
+# How to run EchoBridge
+To run echobridge in its "basic" configuration you need only a JDK/JRE.
+Example command line : 
+C:\utility\jdk-14.0.2\bin\javaw.exe -classpath "C:\...\echobridge\bin" net.cantylab.EchoBridgeServer "C:\..\echobridge\conf\configuration.xml"
+
+
+# Dependencies
+To use MQTTDevices class you need the MQTT_PAHO_CLIENT library.
+You need only to add the mqtt_paho_client.jar file in the command line like in the example below : 
+C:\utility\jdk-14.0.2\bin\javaw.exe -classpath "C:\...\echobridge\bin;C:\..\echobridge\libs\mqtt_paho_client.jar" net.cantylab.EchoBridgeServer "C:\..\echobridge\conf\configuration.xml"
 
 # Latest Changes 
 In the next releases i will add support for :
