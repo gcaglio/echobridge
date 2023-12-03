@@ -1,25 +1,11 @@
 package net.cantylab;
 
-import java.io.*;
-import java.net.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.net.MulticastSocket;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Properties;
 
 import net.cantylab.devices.Device;
 
@@ -50,12 +36,12 @@ public class BroadcastUdpServer implements Runnable{
 		Hashtable<String, String> echo_discovery = new Hashtable<>();
 		String discovery = "";
 		
-				
+		MulticastSocket sock=null;
 		try {
 			 
 			 InetAddress addr = InetAddress.getByName("239.255.255.250");
 			 
-			 MulticastSocket sock = new MulticastSocket(port);
+			 sock = new MulticastSocket(port);
 //			 sock.setTimeToLive(ttl);
 			 sock.joinGroup(addr);
 			 sock.setLoopbackMode(true);
@@ -107,6 +93,15 @@ public class BroadcastUdpServer implements Runnable{
 		} catch (IOException e) {
 			System.out.println("Errore critico durante tentativo di apertura porta " + port + " ." + e.getMessage());
 			e.printStackTrace();
+		}
+		
+		if (sock!=null)
+		{
+			try { 
+			 sock.close();
+			}catch(Exception e) {
+				/*NOP*/
+			}
 		}
 
 	}

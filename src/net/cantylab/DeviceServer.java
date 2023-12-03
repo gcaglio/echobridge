@@ -26,10 +26,10 @@ public class DeviceServer implements Runnable{
 	
     public void run(){
     	run = true;
-
+    	ServerSocket server = null;
     	try {
     		
-    		ServerSocket server = new ServerSocket(port,200,InetAddress.getByName(ip));
+    		server = new ServerSocket(port,200,InetAddress.getByName(ip));
 			
 	    	while(run)
 			{
@@ -42,11 +42,20 @@ public class DeviceServer implements Runnable{
 					conn_handler.start();
 					
 			}    		
+	    	
 		}catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-
+    	if (server!=null) {
+    		try { 
+    			server.close();
+    		}catch(Exception e)
+    		{
+    			/*NOP*/
+    		}
+    	}
+    	
     }
     
     public void terminate() {

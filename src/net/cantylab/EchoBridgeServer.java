@@ -1,8 +1,6 @@
 package net.cantylab;
 
 import java.io.File;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -16,7 +14,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import net.cantylab.devices.Device;
-import net.cantylab.devices.DummyDevice;
 
 public class EchoBridgeServer {
 	public static void main(String args[])
